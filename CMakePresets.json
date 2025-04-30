@@ -1,0 +1,52 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 20,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "cuda-win",
+      "displayName": "cuda-win",
+      "generator": "Visual Studio 17 2022",
+      "binaryDir": "${sourceDir}/build",
+      "cacheVariables": {
+        "CMAKE_CUDA_COMPILER": "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.8/bin/nvcc.exe",
+        "CMAKE_CUDA_STANDARD": "17",
+        "CMAKE_CUDA_STANDARD_REQUIRED": "ON"
+      },
+      "condition": {
+          "type": "equals",
+          "lhs": "${hostSystemName}",
+          "rhs": "Windows"
+      }
+    },
+
+    {
+        "name": "cuda-linux",
+        "condition": {
+          "type": "equals",
+          "lhs": "${hostSystemName}",
+          "rhs": "Linux"
+        },
+        "cacheVariables": {
+          "CMAKE_BUILD_TYPE": "Debug",
+          "CMAKE_CUDA_HOST_COMPILER": "g++",
+          "CMAKE_CUDA_FLAGS": "-Xcompiler=-Wall -G"
+        }
+    }
+  ],
+
+
+  "buildPresets": [
+    {
+      "name": "cuda-win-build",
+      "configurePreset": "cuda-win"
+    },
+    {
+      "name": "cuda-linux-build",
+      "configurePreset": "cuda-linux"
+    }
+  ]
+}
