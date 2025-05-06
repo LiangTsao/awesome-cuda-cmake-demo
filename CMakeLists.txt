@@ -1,6 +1,3 @@
-cmake_minimum_required(VERSION 3.20)
-
-project(MyCudaProject LANGUAGES C CXX CUDA)
 
 # Find the CUDA toolkit
 #find_package(CUDAToolkit REQUIRED)
@@ -19,13 +16,13 @@ set(CMAKE_CUDA_COMPILER "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.
 
 # Source file
 # Add target for bandwidthTest
-add_executable(demo main.cu)
+add_executable(cuda-demo main.cu)
 
-target_compile_options(demo PRIVATE $<$<COMPILE_LANGUAGE:CUDA>:--extended-lambda>)
+target_compile_options(cuda-demo PRIVATE $<$<COMPILE_LANGUAGE:CUDA>:--extended-lambda>)
 
-target_compile_features(demo PRIVATE cxx_std_17 cuda_std_17)
+target_compile_features(cuda-demo PRIVATE cxx_std_17 cuda_std_17)
 
-set_target_properties(demo PROPERTIES CUDA_SEPARABLE_COMPILATION ON)
+set_target_properties(cuda-demo PROPERTIES CUDA_SEPARABLE_COMPILATION ON)
 
 # Link the executable against the CUDA libraries
-target_link_libraries(demo PRIVATE CUDA::cudart)
+target_link_libraries(cuda-demo PRIVATE CUDA::cudart)

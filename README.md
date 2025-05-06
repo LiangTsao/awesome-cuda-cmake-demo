@@ -1,1 +1,0 @@
-# awesome-cuda-cmake-demo
